@@ -1,2 +1,0 @@
-# meumetro-backend
-meumetro-backend
