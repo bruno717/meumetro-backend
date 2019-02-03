@@ -9,4 +9,3 @@ class MeumetroApplication
 fun main(args: Array<String>) {
 	runApplication<MeumetroApplication>(*args)
 }
-
