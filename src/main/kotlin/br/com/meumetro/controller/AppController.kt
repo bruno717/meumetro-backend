@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController
 import javax.servlet.http.HttpServletResponse
 
 @RestController
-@RequestMapping(value = ["app"])
+@RequestMapping("app")
 class AppController(@Autowired private val appService: AppService) {
 
-    @GetMapping(value = ["version"])
+    @GetMapping("version")
     fun verifyVersionApp(@RequestParam appVersion: String, response: HttpServletResponse) {
 
         if (!appService.isLatestVersion(appVersion)) {

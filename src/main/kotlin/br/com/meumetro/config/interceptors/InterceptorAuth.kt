@@ -12,7 +12,7 @@ class InterceptorAuth : HandlerInterceptorAdapter() {
 
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
 
-        if (SecurityManager.isValidSecurityKey(request.getHeader(SECURITY_KEY))) {
+        if (!SecurityManager.isValidSecurityKey(request.getHeader(SECURITY_KEY))) {
             val messageError = "Erro de autorização"
             response.status = HttpServletResponse.SC_UNAUTHORIZED
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, messageError)
