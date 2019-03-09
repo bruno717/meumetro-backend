@@ -16,6 +16,11 @@ class LineController @Autowired constructor(private val service: LineService) {
 
     @GetMapping("official")
     fun getLinesStatusOfficial(): List<LineDTO> {
-        return service.getStatusLinesOnPageOfficial()
+        return service.getLinesStatusOnPageOfficial()
+    }
+
+    @GetMapping("by_user")
+    fun getLinesStatusByUser(): List<LineDTO> {
+        return service.getLinesStatusByUser()
     }
 }

@@ -5,7 +5,7 @@ import br.com.meumetro.extensions.removeAccent
 enum class LineType(
         val value: String,
         val nameLine: String,
-        val nameFormated: String
+        val nameFormatted: String
 ) {
 
     LINE_1_BLUE("1", "Azul", "Linha 1 Azul"),
@@ -32,7 +32,7 @@ enum class LineType(
         }
 
         fun getLineTypeByName(name: String): LineType? {
-            val nameWithoutAccent = name.removeAccent(name)
+            val nameWithoutAccent = name.removeAccent()
             return values().firstOrNull { it.nameLine.equals(nameWithoutAccent, true) }
         }
     }

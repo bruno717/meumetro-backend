@@ -4,17 +4,17 @@ import br.com.meumetro.enums.LineType
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
-@Document
+@Document(collection = "Lines")
 class Line {
 
     @Id
-    val id = String()
-    val lineType: LineType? = null
-    val name: String? = null
-    val situation: String? = null
-    val description: String? = null
-    val type: String? = null
-    val modificationDate: String? = null
+    var id: String? = String()
+    var lineType: LineType? = null
+    var name: String? = null
+    var situation: String? = null
+    var description: String? = null
+    var type: String? = null
+    var modificationDate: String? = null
 
     companion object {
         const val PATTERN_DATE = "yyyy-MM-dd'T'HH:mm:ss"

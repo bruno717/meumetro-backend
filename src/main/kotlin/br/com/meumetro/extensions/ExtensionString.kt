@@ -2,9 +2,9 @@ package br.com.meumetro.extensions
 
 import java.text.Normalizer
 
-fun String.removeAccent(text: String): String {
+fun String.removeAccent(): String {
     val regex = Regex("[^\\p{ASCII}]")
-    return Normalizer.normalize(text, Normalizer.Form.NFD).replace(regex, String())
+    return Normalizer.normalize(this, Normalizer.Form.NFD).replace(regex, String())
 }
 
 fun String.stripAccents(text: String): String {

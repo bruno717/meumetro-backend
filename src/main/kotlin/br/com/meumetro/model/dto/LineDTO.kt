@@ -3,7 +3,7 @@ package br.com.meumetro.model.dto
 import br.com.meumetro.enums.LineType
 
 data class LineDTO(
-        val id: String? = null,
+        var id: String? = null,
         val lineType: LineType? = null,
         val name: String? = null,
         val situation: String? = null,
@@ -14,7 +14,7 @@ data class LineDTO(
     constructor(response: LineResponseDTO) : this(
             null,
             LineType.getLineTypeByName(response.name ?: String()),
-            LineType.getLineTypeByName(response.name ?: String())?.nameFormated,
+            LineType.getLineTypeByName(response.name ?: String())?.nameFormatted,
             response.status,
             response.description,
             response.type,

@@ -23,6 +23,9 @@ class MeuMetroConfiguration : AbstractReactiveMongoConfiguration() {
     @Value("\${spring.data.mongodb.database}")
     private val dataBase: String? = null
 
+    @Value("\${spring.data.mongodb.database.name}")
+    private val dataBaseName: String? = null
+
     @Bean
     fun getModelMapper(): ModelMapper {
         val modelMapper = ModelMapper()
@@ -39,7 +42,7 @@ class MeuMetroConfiguration : AbstractReactiveMongoConfiguration() {
     }
 
     override fun getDatabaseName(): String {
-        return DATA_BASE_NAME
+        return dataBaseName ?: String()
     }
 
     @Bean
@@ -47,9 +50,5 @@ class MeuMetroConfiguration : AbstractReactiveMongoConfiguration() {
         val restTemplate = RestTemplate()
         restTemplate.messageConverters.add(StringHttpMessageConverter())
         return restTemplate
-    }
-
-    companion object {
-        private const val DATA_BASE_NAME = "meumetrodb"
     }
 }
