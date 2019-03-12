@@ -12,7 +12,7 @@ enum class LineType(
     LINE_2_GREEN("2", "Verde", "Linha 2 Verde"),
     LINE_3_RED("3", "Vermelha", "Linha 3 Vermelha"),
     LINE_4_YELLOW("4", "Amarela", "Linha 4 Amarela"),
-    LINE_5_LILAC("5", "Lilas", "Linha 5 LilÃ¡s"),
+    LINE_5_LILAC("5", "Lilas", "Linha 5 Lilás"),
     LINE_7_RUBY("7", "Rubi", "Linha 7 Rubi"),
     LINE_8_DIAMOND("8", "Diamante", "Linha 8 Diamante"),
     LINE_9_EMERALD("9", "Esmeralda", "Linha 9 Esmeralda"),

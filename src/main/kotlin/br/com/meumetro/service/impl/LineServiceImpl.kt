@@ -64,6 +64,12 @@ class LineServiceImpl @Autowired constructor(
 
     override fun getLinesStatusByUser(): List<LineDTO> {
 
+        val typeMetro = "M"
+        val typeViaQuatro = "4"
+        val typeCPTM = "C"
+
+        val listResponse = ArrayList<Line>()
+
         lineOfficialList = getLinesStatusOnPageOfficial()
                 .map { modelMapper.map(it, Line::class.java) }
 
@@ -81,7 +87,19 @@ class LineServiceImpl @Autowired constructor(
         }
         lineUsersList?.forEach { it.id = null }
 
-        return lineUsersList?.map { modelMapper.map(it, LineDTO::class.java) } ?: ArrayList()
+        val sortedLinesMetro = lineUsersList?.filter { it.type == typeMetro || it.type == typeViaQuatro }
+                ?.sortedBy { it.lineType }
+                ?.toMutableList() as ArrayList<Line>
+
+
+        val sortedLinesCPTM = lineUsersList.filter { it.type == typeCPTM }
+                .sortedBy { it.lineType }
+                .toMutableList() as ArrayList<Line>
+
+        listResponse.addAll(sortedLinesMetro)
+        listResponse.addAll(sortedLinesCPTM)
+
+        return listResponse.map { modelMapper.map(it, LineDTO::class.java) }
     }
 
     override fun getLinesStatusByUserInDataBase(): ArrayList<LineDTO> {
