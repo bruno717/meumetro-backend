@@ -15,8 +15,6 @@ import org.springframework.data.mongodb.config.AbstractReactiveMongoConfiguratio
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories
 import org.springframework.http.converter.StringHttpMessageConverter
 import org.springframework.web.client.RestTemplate
-import java.util.*
-import javax.annotation.PostConstruct
 
 
 @SpringBootApplication(exclude = [MongoAutoConfiguration::class, MongoDataAutoConfiguration::class, MongoReactiveDataAutoConfiguration::class])
@@ -53,12 +51,5 @@ class MeuMetroConfiguration : AbstractReactiveMongoConfiguration() {
         val restTemplate = RestTemplate()
         restTemplate.messageConverters.add(StringHttpMessageConverter())
         return restTemplate
-    }
-
-    @PostConstruct
-    fun init() {
-        val tz = TimeZone.getTimeZone("America/Sao_Paulo")
-        TimeZone.setDefault(tz)
-        GregorianCalendar.getInstance(tz)
     }
 }
