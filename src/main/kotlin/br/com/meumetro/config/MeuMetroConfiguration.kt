@@ -56,7 +56,7 @@ class MeuMetroConfiguration : AbstractReactiveMongoConfiguration() {
     }
 
     @PostConstruct
-    fun setupTimeZone() {
+    fun init() {
         val tz = TimeZone.getTimeZone("America/Sao_Paulo")
         TimeZone.setDefault(tz)
         GregorianCalendar.getInstance(tz)
