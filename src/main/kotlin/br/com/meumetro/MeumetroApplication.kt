@@ -12,7 +12,7 @@ class MeumetroApplication {
 
     @PostConstruct
     fun init() {
-        val timeZone = TimeZone.getTimeZone("America/Sao_Paulo")
+        val timeZone = TimeZone.getTimeZone("Brazil/East")
         TimeZone.setDefault(timeZone)
         GregorianCalendar.getInstance(timeZone)
     }
