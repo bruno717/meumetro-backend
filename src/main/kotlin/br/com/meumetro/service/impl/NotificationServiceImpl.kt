@@ -58,8 +58,8 @@ class NotificationServiceImpl @Autowired constructor(
         notification.message.type = type.value
         notification.message.lines = lineList
         notification.message.date = SimpleDateFormat(Line.PATTERN_DATE, Locale.getDefault()).format(Date())
-        notification.deviceList = getDeviceListToken()
-//        notification.deviceList = arrayListOf(deviceToken, deviceAsus)
+//        notification.deviceList = getDeviceListToken()
+        notification.deviceList = arrayListOf(deviceToken)
 
         val json = objectMapper.writeValueAsString(notification)
 

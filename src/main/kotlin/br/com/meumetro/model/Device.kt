@@ -6,8 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document
 @Document(collection = "Devices")
 data class Device(
         @Id
-        val id: String? = null,
-        val idDevice: String? = null,
-        val tokenDevice: String? = null,
+        var id: String? = null,
+        var idDevice: String? = null,
+        var tokenDevice: String? = null,
         var creationDate: String? = null
 )

@@ -19,7 +19,17 @@ class DeviceServiceImpl @Autowired constructor(
 
     override fun saveDevice(deviceDTO: DeviceDTO): DeviceDTO {
         val device = modelMapper.map(deviceDTO, Device::class.java)
+
         device.creationDate = SimpleDateFormat(PATTERN_DATE, Locale.US).format(Date())
+        val deviceFromDataBase = repository.findAll()
+                .collectList()
+                .block()
+                ?.firstOrNull { it.idDevice == deviceDTO.idDevice }
+
+        deviceFromDataBase?.let {
+            device.id = it.id
+        }
+
         val deviceSaved = repository.save(device).block()
         return modelMapper.map(deviceSaved, DeviceDTO::class.java)
     }
