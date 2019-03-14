@@ -47,8 +47,8 @@ class NotificationServiceImpl @Autowired constructor(
 
     private fun sendNotification(type: NotificationType, lineList: List<LineDTO>) {
 
-        val deviceToken = "d0ZWa56sU5U:APA91bGP9owSaqaD9-ubJJSnfUS12FgIJwTJ91yrO9Nu-6n665ps57sRKzSjFuDkwxQm_4UoziAKAxwmeXkGFdKO0FGc9tvMxLcZISt29547n1_7ZaPqC68Pgkb35yMvZ8xyIfdu0NaF"
-        val deviceAsus = "drgArZY3Pz8:APA91bEVyTSOekhN8y5f6scgGxbASJ-cvmuoj4zKr0bTo31RaSItndQA6I0GdvOVp2qQJAKLf5e2_md2ykMzOiFchTFzs2DFMcmX63iSoTBRmsiNWuiZ6t2Pz3YQGN_ldGFWkk4SjnIk"
+//        val deviceToken = "d0ZWa56sU5U:APA91bGP9owSaqaD9-ubJJSnfUS12FgIJwTJ91yrO9Nu-6n665ps57sRKzSjFuDkwxQm_4UoziAKAxwmeXkGFdKO0FGc9tvMxLcZISt29547n1_7ZaPqC68Pgkb35yMvZ8xyIfdu0NaF"
+//        val deviceAsus = "drgArZY3Pz8:APA91bEVyTSOekhN8y5f6scgGxbASJ-cvmuoj4zKr0bTo31RaSItndQA6I0GdvOVp2qQJAKLf5e2_md2ykMzOiFchTFzs2DFMcmX63iSoTBRmsiNWuiZ6t2Pz3YQGN_ldGFWkk4SjnIk"
         val notification = NotificationMessageDTO()
         notification.message.title = getTitleMessage(type, lineList)
         if (lineList.size == 1) {
@@ -58,8 +58,8 @@ class NotificationServiceImpl @Autowired constructor(
         notification.message.type = type.value
         notification.message.lines = lineList
         notification.message.date = SimpleDateFormat(Line.PATTERN_DATE, Locale.getDefault()).format(Date())
-//        notification.deviceList = getDeviceListToken()
-        notification.deviceList = arrayListOf(deviceToken)
+        notification.deviceList = getDeviceListToken()
+//        notification.deviceList = arrayListOf(deviceToken)
 
         val json = objectMapper.writeValueAsString(notification)
 
