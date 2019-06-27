@@ -18,7 +18,7 @@ data class LineResponseDTO(
         val name: String? = null,
 
         @JsonProperty("Tipo")
-        val type: String? = null,
+        var type: String? = null,
 
         @JsonProperty("DataGeracao")
         val generationDate: String? = null

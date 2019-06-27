@@ -30,6 +30,10 @@ class LineServiceImpl @Autowired constructor(
         private val objectMapper: ObjectMapper
 ) : LineService {
 
+    private val typeMetro = "M"
+    private val typeViaQuatro = "4"
+    private val typeViaMobilidade = "5"
+    private val typeCPTM = "C"
     private var lineOfficialList: List<Line>? = null
 
     override fun updateLine(lineDTO: LineDTO): LineDTO {
@@ -56,17 +60,18 @@ class LineServiceImpl @Autowired constructor(
         if (response.statusCode == HttpStatus.OK) {
             val body = response.body ?: String()
             return objectMapper.readValue<List<LineResponseDTO>>(body)
-                    .map { LineDTO(it) }
+                    .map {
+                        if (it.type == typeViaQuatro || it.type == typeViaMobilidade) {
+                            it.type = typeMetro
+                        }
+                        LineDTO(it)
+                    }
         } else {
             throw ResponseStatusException(response.statusCode)
         }
     }
 
     override fun getLinesStatusByUser(): List<LineDTO> {
-
-        val typeMetro = "M"
-        val typeViaQuatro = "4"
-        val typeCPTM = "C"
 
         val listResponse = ArrayList<Line>()
 
