@@ -15,6 +15,8 @@ import org.springframework.data.mongodb.config.AbstractReactiveMongoConfiguratio
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories
 import org.springframework.http.converter.StringHttpMessageConverter
 import org.springframework.web.client.RestTemplate
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 @SpringBootApplication(exclude = [MongoAutoConfiguration::class, MongoDataAutoConfiguration::class, MongoReactiveDataAutoConfiguration::class])
@@ -52,4 +54,11 @@ class MeuMetroConfiguration : AbstractReactiveMongoConfiguration() {
         restTemplate.messageConverters.add(StringHttpMessageConverter())
         return restTemplate
     }
+
+    @Bean
+    fun getSimpleDateFormat(): SimpleDateFormat {
+        val pattern = "yyyy-MM-dd'T'hh:mm:ss"
+        return SimpleDateFormat(pattern, Locale.getDefault())
+    }
+
 }
