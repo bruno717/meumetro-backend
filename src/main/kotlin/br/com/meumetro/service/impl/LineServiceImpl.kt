@@ -142,6 +142,7 @@ class LineServiceImpl @Autowired constructor(
         return linesToNotify.filter {
             it.situation?.removeAccent()?.equals(Line.NORMAL_OPERATION, true) != true
                     && it.situation?.contains(Line.NORMAL_FINISHED) != true
+                    && it.situation?.removeAccent()?.equals(Line.INFORMATION_UNAVAILABLE, true) != true
         }
     }
 

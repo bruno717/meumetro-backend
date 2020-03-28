@@ -20,5 +20,7 @@ class Line {
         const val PATTERN_DATE = "yyyy-MM-dd'T'HH:mm:ss"
         const val NORMAL_OPERATION = "Operacao normal"
         const val NORMAL_FINISHED = "Encerrada"
+        const val INFORMATION_UNAVAILABLE = "Informacao indisponivel"
     }
+
 }
