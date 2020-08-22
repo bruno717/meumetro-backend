@@ -15,9 +15,9 @@ class AdvertisementController @Autowired constructor(
         private val service: AdvertisementServiceImpl
 ) {
 
-    @GetMapping("version")
-    fun getAdvertisements(@RequestParam accessToken: String? = null, response: HttpServletResponse): List<AdvertisementDTO> {
-        return service.fetchAdvertisement()
+    @GetMapping("items")
+    fun getAdvertisements(@RequestParam accessToken: String, @RequestParam sellerId: Long, response: HttpServletResponse): List<AdvertisementDTO> {
+        return service.fetchAdvertisement(accessToken, sellerId)
                 .blockingGet()
     }
 
