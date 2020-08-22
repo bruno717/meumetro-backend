@@ -16,7 +16,7 @@ class AdvertisementController @Autowired constructor(
 ) {
 
     @GetMapping("items")
-    fun getAdvertisements(@RequestParam accessToken: String, @RequestParam sellerId: Long, response: HttpServletResponse): List<AdvertisementDTO> {
+    fun getAdvertisements(@RequestParam("access_token") accessToken: String, @RequestParam("seller_id") sellerId: Long, response: HttpServletResponse): List<AdvertisementDTO> {
         return service.fetchAdvertisement(accessToken, sellerId)
                 .blockingGet()
     }
