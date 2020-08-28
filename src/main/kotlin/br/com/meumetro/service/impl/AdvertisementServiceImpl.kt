@@ -31,10 +31,9 @@ class AdvertisementServiceImpl @Autowired constructor(
         val limit = 100
         val total = advertisementIds.size
 
-        val response = restTemplate.getForEntity(
-                "https://api.mercadolibre.com/users/615855164/items/search?status=${status}&access_token=${accessToken}&offset=${total}&limit=${limit}",
-                String::class.java
-        )
+        var url = "https://api.mercadolibre.com/users/{seller_id}/items/search?status=${status}&access_token=${accessToken}&offset=${total}&limit=${limit}"
+        url = url.replace("{seller_id}", sellerId.toString())
+        val response = restTemplate.getForEntity(url, String::class.java)
 
         if (response.statusCode == HttpStatus.OK) {
             val advertisementIdsDTO = objectMapper.readValue<AdvertisementIdsDTO>(response.body, AdvertisementIdsDTO::class.java)
