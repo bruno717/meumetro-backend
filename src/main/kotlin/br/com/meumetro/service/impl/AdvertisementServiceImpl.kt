@@ -79,6 +79,7 @@ class AdvertisementServiceImpl @Autowired constructor(
             print("Response: ${items.size}")
             return@zip items.toList()
         }
+        advertisementIds.clear()
         return if (requestAdvertisementByIdList.isEmpty()) Single.just(listOf()) else zip
     }
 
