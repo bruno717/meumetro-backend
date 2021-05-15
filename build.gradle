@@ -36,7 +36,8 @@ dependencies {
 	implementation "org.jetbrains.kotlin:kotlin-reflect"
 
 	implementation "org.modelmapper:modelmapper:2.3.2"
-	implementation "org.mongodb:mongodb-driver-reactivestreams:1.10.0"
+	implementation "org.mongodb:mongodb-driver-reactivestreams:1.13.1"
+//	implementation "org.mongodb:mongodb-driver-reactivestreams:1.10.0"
 
 	implementation "joda-time:joda-time:2.10.1"
 

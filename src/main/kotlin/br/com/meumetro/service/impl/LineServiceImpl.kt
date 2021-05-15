@@ -55,7 +55,7 @@ class LineServiceImpl @Autowired constructor(
 
     override fun getLinesStatusOnPageOfficial(): List<LineDTO> {
 
-        val response = restTemplate.getForEntity(ConnectionType.PRODUCTION_STATUS_CPTM_V4.url, String::class.java)
+        val response = restTemplate.getForEntity(ConnectionType.PRODUCTION_STATUS_CPTM_V3.url, String::class.java)
 
         if (response.statusCode == HttpStatus.OK) {
             val body = response.body ?: String()
