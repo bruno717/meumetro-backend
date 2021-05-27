@@ -6,10 +6,10 @@ import com.fasterxml.jackson.annotation.JsonProperty
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class LineResponseDTO(
         @JsonProperty("Status")
-        val status: String? = null,
+        var status: String? = null,
 
         @JsonProperty("Descricao")
-        val description: String? = null,
+        var description: String? = null,
 
         @JsonProperty("LinhaId")
         val lineId: Int? = null,
@@ -21,5 +21,5 @@ data class LineResponseDTO(
         var type: String? = null,
 
         @JsonProperty("DataGeracao")
-        val generationDate: String? = null
+        var generationDate: String? = null
 )

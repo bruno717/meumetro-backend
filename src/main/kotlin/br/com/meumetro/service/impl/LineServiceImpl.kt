@@ -5,6 +5,7 @@ import br.com.meumetro.extensions.*
 import br.com.meumetro.model.Line
 import br.com.meumetro.model.dto.LineDTO
 import br.com.meumetro.model.dto.LineResponseDTO
+import br.com.meumetro.network.StatusLineOfficialAPI
 import br.com.meumetro.repository.LineRepository
 import br.com.meumetro.service.LineService
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -17,9 +18,9 @@ import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
 import org.springframework.web.server.ResponseStatusException
+import retrofit2.Retrofit
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 @Service
@@ -27,8 +28,12 @@ class LineServiceImpl @Autowired constructor(
         private val modelMapper: ModelMapper,
         private val repository: LineRepository,
         private val restTemplate: RestTemplate,
-        private val objectMapper: ObjectMapper
+        private val objectMapper: ObjectMapper,
+        private val retrofit: Retrofit
 ) : LineService {
+
+    private val api: StatusLineOfficialAPI
+        get() = retrofit.create(StatusLineOfficialAPI::class.java)
 
     private val typeMetro = "M"
     private val typeViaQuatro = "4"
@@ -54,15 +59,24 @@ class LineServiceImpl @Autowired constructor(
     }
 
     override fun getLinesStatusOnPageOfficial(): List<LineDTO> {
-
-        val response = restTemplate.getForEntity(ConnectionType.PRODUCTION_STATUS_CPTM_V3.url, String::class.java)
+        val response = restTemplate.getForEntity(ConnectionType.PRODUCTION_STATUS_CPTM_V4.url, String::class.java)
 
         if (response.statusCode == HttpStatus.OK) {
             val body = response.body ?: String()
+            var isOperationClosed = false
             return objectMapper.readValue<List<LineResponseDTO>>(body)
+                    .map {
+                        if (it.status.equals("Operações Encerradas", true)) isOperationClosed = true
+                        it
+                    }
                     .map {
                         if (it.type == typeViaQuatro || it.type == typeViaMobilidade) {
                             it.type = typeMetro
+                        }
+                        if (it.status.equals("Informação indisponível", true)) {
+                            it.status = if (isOperationClosed) "Operação Encerrada" else "Operação Normal"
+                            it.description = String()
+                            it.generationDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(Date())
                         }
                         LineDTO(it)
                     }

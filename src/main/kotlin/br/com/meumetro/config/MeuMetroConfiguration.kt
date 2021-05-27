@@ -1,10 +1,13 @@
 package br.com.meumetro.config
 
+import br.com.meumetro.network.RetrofitClient
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.mongodb.reactivestreams.client.MongoClient
 import com.mongodb.reactivestreams.client.MongoClients
 import org.modelmapper.ModelMapper
 import org.modelmapper.config.Configuration
 import org.modelmapper.convention.MatchingStrategies
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration
@@ -15,6 +18,7 @@ import org.springframework.data.mongodb.config.AbstractReactiveMongoConfiguratio
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories
 import org.springframework.http.converter.StringHttpMessageConverter
 import org.springframework.web.client.RestTemplate
+import retrofit2.Retrofit
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,6 +32,9 @@ class MeuMetroConfiguration : AbstractReactiveMongoConfiguration() {
 
     @Value("\${spring.data.mongodb.database.name}")
     private val dataBaseName: String? = null
+
+    @Autowired
+    private lateinit var objectMapper: ObjectMapper
 
     @Bean
     fun getModelMapper(): ModelMapper {
@@ -59,6 +66,12 @@ class MeuMetroConfiguration : AbstractReactiveMongoConfiguration() {
     fun getSimpleDateFormat(): SimpleDateFormat {
         val pattern = "yyyy-MM-dd'T'hh:mm:ss"
         return SimpleDateFormat(pattern, Locale.getDefault())
+    }
+
+    @Bean
+    fun getRetrofit(): Retrofit {
+        return RetrofitClient(objectMapper).instance()
+
     }
 
 }
