@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 @Service
 class AppServiceImpl : AppService {
 
-    private val versionApp = "1.4.20"
+    private val versionApp = "1.4.21"
 
     override fun isLatestVersion(versionApp: String): Boolean {
         return this.versionApp == versionApp
