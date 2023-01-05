@@ -1,6 +1,7 @@
 package br.com.meumetro.model.dto
 
 import br.com.meumetro.enums.LineType
+import org.jsoup.nodes.Element
 
 data class LineDTO(
         var id: String? = null,
@@ -20,4 +21,14 @@ data class LineDTO(
             response.type,
             response.generationDate
     )
+
+        constructor(codeLine: String, statusLine: String, type: LineType) : this(
+                null,
+                type,
+                LineType.getLineTypeByCode(codeLine)?.nameFormatted,
+                statusLine,
+                null,
+                null,
+                null
+        )
 }
