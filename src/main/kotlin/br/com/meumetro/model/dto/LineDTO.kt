@@ -22,13 +22,13 @@ data class LineDTO(
             response.generationDate
     )
 
-        constructor(codeLine: String, statusLine: String, type: LineType) : this(
+        constructor(codeLine: String, statusLine: String, type: LineType, description: String) : this(
                 null,
                 type,
                 LineType.getLineTypeByCode(codeLine)?.nameFormatted,
                 statusLine,
-                null,
-                null,
+                description,
+                LineType.getCompanyType(type),
                 null
         )
 }

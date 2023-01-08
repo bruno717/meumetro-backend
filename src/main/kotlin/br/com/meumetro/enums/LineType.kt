@@ -3,10 +3,10 @@ package br.com.meumetro.enums
 import br.com.meumetro.extensions.removeAccent
 
 enum class LineType(
-        val value: String,
-        val nameLine: String,
-        val nameFormatted: String,
-        val codeClassCss: String
+    val value: String,
+    val nameLine: String,
+    val nameFormatted: String,
+    val codeClassCss: String
 ) {
 
     LINE_1_BLUE("1", "Azul", "Linha 1 Azul", "line-1"),
@@ -39,6 +39,20 @@ enum class LineType(
 
         fun getLineTypeByCode(code: String): LineType? {
             return values().firstOrNull { it.value.equals(code, true) }
+        }
+
+        fun getCompanyType(type: LineType): String {
+            return when (type) {
+                LINE_4_YELLOW -> "4"
+                LINE_7_RUBY,
+                LINE_8_DIAMOND,
+                LINE_9_EMERALD,
+                LINE_10_TURQUOISE,
+                LINE_11_CORAL,
+                LINE_12_SAPPHIRE,
+                LINE_13_JADE -> "c"
+                else -> "m"
+            }
         }
     }
 }

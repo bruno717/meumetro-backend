@@ -96,8 +96,17 @@ class LineServiceImpl @Autowired constructor(
         val lines = LineType.values().map {
             val elementLine = element?.getElementsByClass(it.codeClassCss)?.firstOrNull()
             val codeLine = elementLine?.getElementsByTag("span")?.text() ?: String()
-            val statusLine = elementLine?.getElementsByTag("div")?.text() ?: String()
-            LineDTO(codeLine, statusLine, it)
+            val statusLine = elementLine?.getElementsByTag("div")?.firstOrNull()?.text() ?: String()
+            var description = String()
+
+            if (elementLine?.getElementsByClass("has-description")?.isNotEmpty() == true) {
+                description = elementLine.getElementsByClass("msg").firstOrNull()
+                    ?.getElementsByTag("p")?.text() ?: String()
+            }
+//            else {
+//                statusLine = elementLine?.getElementsByTag("div")?.text() ?: String()
+//            }
+            LineDTO(codeLine, statusLine, it, description)
         }
 
         return lines
